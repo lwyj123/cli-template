@@ -1,0 +1,91 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+const exists = require('fs').existsSync
+const path = require('path')
+const ora = require('ora')
+const home = require('user-home')
+const tildify = require('tildify')
+const chalk = require('chalk')
+const inquirer = require('inquirer')
+const rm = require('rimraf').sync
+const logger = require('../lib/logger')
+// const checkVersion = require('../lib/check-version')
+// const warnings = require('../lib/warnings')
+
+
+/**
+ * Usage.
+ */
+
+program
+  .usage('<file(s)-path>')
+  .option('-f, --file [file-path]', 'output into a file')
+
+/**
+ * Help.
+ */
+
+program.on('--help', () => {
+  console.log('  Examples:')
+  console.log()
+  console.log(chalk.gray('    # parse a ts file and output into a file'))
+  console.log('    $ ts-parser ./test/type.ts -f keke.json')
+  console.log()
+  console.log(chalk.gray('    # parse a ts project or directory and output into a file'))
+  console.log('    $ ts-parser ./test/project')
+  console.log()
+})
+
+/**
+ * Help.
+ */
+
+function help () {
+  program.parse(process.argv)
+  if (program.args.length < 1) return program.help()
+  if (!program.file) return program.help()
+}
+help()
+
+/**
+ * Settings.
+ */
+console.log(program.args)
+const rawName = program.args[0]
+const to = path.resolve(rawName || '.')
+const outputTo = path.resolve(program.file)
+
+/**
+ * Padding.
+ */
+
+console.log()
+process.on('exit', () => {
+  console.log()
+})
+
+if (exists(to)) {
+  inquirer.prompt([{
+    type: 'confirm',
+    message: exists(outputTo)
+      ? 'Target file exists. Continue?'
+      : 'Whatever',
+    name: 'ok'
+  }]).then(answers => {
+    if (answers.ok) {
+      run()
+    }
+  }).catch(logger.fatal)
+} else {
+  run()
+}
+
+/**
+ * Check, download and generate the project.
+ */
+
+function run () {
+  logger.success('are you ok?')
+}
+
