@@ -19,7 +19,6 @@ const logger = require('../lib/logger')
  */
 
 program
-  .usage('[file(s)-path]')
   .option('-f, --file <file-path>', 'output into a file')
 
 /**
@@ -29,8 +28,8 @@ program
 program.on('--help', () => {
   console.log('  Examples:')
   console.log()
-  console.log(chalk.gray('    # hello: load a file and output file option'))
-  console.log('    $ lw-node-cli -f ./package.json')
+  console.log(chalk.gray('    # load a file and output file option'))
+  console.log('    $ lw-node-cli -f package.json')
   console.log()
 })
 
@@ -40,7 +39,7 @@ program.on('--help', () => {
 
 function help () {
   program.parse(process.argv)
-  if (program.args.length < 1) return program.help()
+  if (program.args.length !== 0) return program.help()
   if (!program.file) return program.help()
 }
 help()
@@ -79,6 +78,6 @@ if (exists(filePath)) {
  */
 
 function run () {
-  logger.success(filePath)
+  logger.success('path: ', filePath)
 }
 

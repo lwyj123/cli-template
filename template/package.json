@@ -5,10 +5,10 @@
     "author": "{{ author }}",
     "preferGlobal": true,
     "bin": {
-      "lw-node-cli": "bin/lw-node-cli"
+      "lw-test": "bin/lw-test"
     },
     "keywords": [
-      "cli",
+      "cli"
     ],
     "license": "MIT",
     "scripts": {
