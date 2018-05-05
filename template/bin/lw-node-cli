@@ -19,8 +19,8 @@ const logger = require('../lib/logger')
  */
 
 program
-  .usage('<file(s)-path>')
-  .option('-f, --file [file-path]', 'output into a file')
+  .usage('[file(s)-path]')
+  .option('-f, --file <file-path>', 'output into a file')
 
 /**
  * Help.
@@ -29,11 +29,8 @@ program
 program.on('--help', () => {
   console.log('  Examples:')
   console.log()
-  console.log(chalk.gray('    # parse a ts file and output into a file'))
-  console.log('    $ ts-parser ./test/type.ts -f keke.json')
-  console.log()
-  console.log(chalk.gray('    # parse a ts project or directory and output into a file'))
-  console.log('    $ ts-parser ./test/project')
+  console.log(chalk.gray('    # hello: load a file and output file option'))
+  console.log('    $ lw-node-cli -f ./package.json')
   console.log()
 })
 
@@ -52,9 +49,7 @@ help()
  * Settings.
  */
 console.log(program.args)
-const rawName = program.args[0]
-const to = path.resolve(rawName || '.')
-const outputTo = path.resolve(program.file)
+const filePath = path.resolve(program.file)
 
 /**
  * Padding.
@@ -65,12 +60,10 @@ process.on('exit', () => {
   console.log()
 })
 
-if (exists(to)) {
+if (exists(filePath)) {
   inquirer.prompt([{
     type: 'confirm',
-    message: exists(outputTo)
-      ? 'Target file exists. Continue?'
-      : 'Whatever',
+    message: 'Target file exists. Continue?',
     name: 'ok'
   }]).then(answers => {
     if (answers.ok) {
@@ -86,6 +79,6 @@ if (exists(to)) {
  */
 
 function run () {
-  logger.success('are you ok?')
+  logger.success(filePath)
 }
 

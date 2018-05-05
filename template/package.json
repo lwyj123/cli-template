@@ -1,29 +1,16 @@
 {
-    "name": "lw-cli",
+    "name": "{{ name }}",
     "version": "0.0.1",
-    "description": "A simple CLI for lwyj123",
+    "description": "{{ description }}",
+    "author": "{{ author }}",
     "preferGlobal": true,
     "bin": {
-      "lw-cli-test": "bin/lw-cli-test"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/lwyj123/lw-cli.git"
+      "lw-node-cli": "bin/lw-node-cli"
     },
     "keywords": [
       "cli",
-      "template"
     ],
-    "author": {
-      "name": "lwyj123",
-      "email": "443474713@qq.com",
-      "url": "http://lwio.me/"
-    },
     "license": "MIT",
-    "bugs": {
-      "url": "https://github.com/lwyj123/lw-cli/issues"
-    },
-    "homepage": "https://github.com/lwyj123/lw-cli#readme",
     "scripts": {
       "test": "npm run lint && npm run e2e",
       "lint": "eslint test/e2e/test*.js lib bin/* --env mocha",
