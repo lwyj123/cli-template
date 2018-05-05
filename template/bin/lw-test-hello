@@ -21,7 +21,7 @@ program.on('--help', () => {
   console.log('  Examples:')
   console.log()
   console.log(chalk.gray('    # say hello'))
-  console.log('    $ lw-node-cli hello')
+  console.log('    $ lw-test hello')
   console.log()
 })
 
